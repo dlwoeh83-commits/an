@@ -52,10 +52,10 @@ ul, ol { list-style: none; }
 }
 .header-inner { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; }
 .logo { display: flex; align-items: center; gap: 12px; }
-.logo-mark { width: 44px; height: 44px; border-radius: 14px; box-shadow: 0 6px 16px rgba(10,124,122,.28); }
+.logo-mark { width: 44px; height: 44px; border-radius: 14px; box-shadow: 0 6px 16px rgba(29,78,216,.28); }
 .logo-text { display: flex; flex-direction: column; line-height: 1.25; }
 .logo-text strong { font-size: 18px; font-weight: 800; color: var(--ink); letter-spacing: -.04em; }
-.logo-text small { font-size: 10px; color: var(--accent); letter-spacing: .2em; text-transform: uppercase; font-weight: 700; }
+.logo-text small { font-size: 10px; color: #1d4ed8; letter-spacing: .2em; text-transform: uppercase; font-weight: 700; }
 
 .site-nav { display: flex; align-items: center; gap: 2px; }
 .site-nav a { padding: 9px 14px; border-radius: 999px; font-size: 15px; font-weight: 500; color: var(--text); transition: background .2s, color .2s; }
@@ -121,7 +121,7 @@ main > .section:nth-of-type(even) { background: var(--soft); }
 .value:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(15,20,25,.06); }
 .value-icon {
   width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
-  background: var(--accent); color: #fff; font-size: 14px; font-weight: 700; margin-bottom: 26px; letter-spacing: 0;
+  background: #1d4ed8; color: #fff; font-size: 14px; font-weight: 700; margin-bottom: 26px; letter-spacing: 0;
 }
 .value h3 { font-size: 21px; font-weight: 800; color: var(--ink); margin-bottom: 10px; letter-spacing: -.03em; }
 .value p { color: var(--muted); font-size: 15.5px; }
@@ -167,7 +167,7 @@ main > .section:nth-of-type(even) { background: var(--soft); }
 /* 비만 클리닉 */
 .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 14px; }
 .steps li { padding: 32px 26px; border-radius: var(--radius); background: var(--soft); }
-.step-num { display: block; font-size: 15px; font-weight: 800; color: var(--accent); letter-spacing: .06em; }
+.step-num { display: block; font-size: 15px; font-weight: 800; color: #1d4ed8; letter-spacing: .06em; }
 .steps h4 { font-size: 19px; font-weight: 800; color: var(--ink); margin: 14px 0 8px; letter-spacing: -.03em; }
 .steps p { color: var(--muted); font-size: 15px; }
 .obesity-programs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
@@ -235,6 +235,24 @@ main > .section:nth-of-type(even) { background: var(--soft); }
   background: var(--accent); color: #fff; box-shadow: 0 12px 30px rgba(10,124,122,.4);
 }
 .mobile-call strong { margin-left: 6px; }
+
+/* 전화 문의 버튼 — 파란색 */
+.site-nav .nav-cta,
+.hero-actions .btn-primary,
+.mobile-call { background: #1d4ed8; color: #fff; }
+.site-nav .nav-cta:hover,
+.hero-actions .btn-primary:hover { background: #1e40af; color: #fff; }
+.mobile-call { box-shadow: 0 12px 30px rgba(29,78,216,.4); }
+.contact-box .btn-primary { background: #3b82f6; color: #fff; }
+.contact-box .btn-primary:hover { background: #60a5fa; color: #fff; }
+
+/* 통증 · 관절 · 신경 클리닉 — 파란색 */
+.sub-clinic { background: #1d4ed8; }
+#pain .eyebrow,
+.hero-card.card-pain .hero-card-label { color: #1d4ed8; }
+#pain .treatment h4::before { background: #1d4ed8; }
+#pain .symptoms span:hover { border-color: #1d4ed8; color: #1d4ed8; }
+.hero-card.card-pain:hover { background: #e8effd; }
 
 /* 스크롤 등장 효과 */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
