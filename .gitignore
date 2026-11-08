@@ -1,0 +1,7 @@
+﻿# 이전 프로젝트/백업/임시 파일 제외
+backup-luxury/
+css/
+js/
+README.md
+images/hero.jpg
+images/*.png
