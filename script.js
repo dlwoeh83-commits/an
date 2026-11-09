@@ -24,7 +24,7 @@ document.querySelectorAll('.gallery-item img').forEach((img) => {
 });
 
 // 스크롤하면 부드럽게 나타나기
-const targets = document.querySelectorAll('.section-head, .value, .gallery-item, .treatment, .steps li, .program, .doctor, .hours-table, .contact-box, .location');
+const targets = document.querySelectorAll('.section-head, .value, .gallery-item, .treatment, .steps li, .program, .doctor, .hours-table, .contact-box, .location, .disease, .info-box, .faq');
 targets.forEach((el) => el.classList.add('reveal'));
 
 if ('IntersectionObserver' in window) {

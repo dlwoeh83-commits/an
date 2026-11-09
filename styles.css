@@ -176,7 +176,7 @@ main > .section:nth-of-type(even) { background: var(--soft); }
 .program p { color: var(--text); font-size: 15px; opacity: .8; }
 
 /* 의료진 */
-.doctor { display: grid; grid-template-columns: 360px 1fr; gap: 72px; align-items: center; max-width: 1040px; margin: 0 auto; }
+.doctor { display: block; max-width: 820px; margin: 0 auto; }
 .doctor-photo {
   aspect-ratio: 3 / 4; border-radius: 28px; overflow: hidden;
   background: linear-gradient(160deg, #eef1f3, #dde3e7); display: grid; place-items: center; color: var(--muted);
@@ -254,6 +254,39 @@ main > .section:nth-of-type(even) { background: var(--soft); }
 #pain .symptoms span:hover { border-color: #1d4ed8; color: #1d4ed8; }
 .hero-card.card-pain:hover { background: #e8effd; }
 
+/* 안내 박스 (준비물·상담 대상 등) */
+.info-box { margin-top: 14px; padding: 32px 36px; border-radius: var(--radius); background: var(--soft); }
+main > .section:nth-of-type(even) .info-box { background: #fff; }
+.info-box h3 { font-size: 18px; font-weight: 800; color: var(--ink); margin-bottom: 14px; letter-spacing: -.03em; }
+.check-list li { position: relative; padding: 4px 0 4px 28px; color: var(--text); font-size: 15.5px; }
+.check-list li::before {
+  content: ""; position: absolute; left: 2px; top: 11px; width: 14px; height: 8px;
+  border-left: 2.5px solid #1d4ed8; border-bottom: 2.5px solid #1d4ed8; transform: rotate(-45deg);
+}
+.info-foot { margin-top: 12px; font-size: 14px; color: var(--muted); }
+
+/* 대표 진료 질환 */
+.disease-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.disease { padding: 28px 28px; border-radius: var(--radius); background: #fff; border: 1px solid var(--line); }
+.disease h4 { font-size: 17.5px; font-weight: 800; color: var(--ink); margin-bottom: 8px; letter-spacing: -.03em; }
+.disease p { color: var(--muted); font-size: 14.5px; line-height: 1.65; }
+
+/* 자주 묻는 질문 */
+.faq { max-width: 860px; margin: 0 auto; border-top: 2px solid var(--ink); }
+.faq-item { border-bottom: 1px solid var(--line); }
+.faq-item summary {
+  list-style: none; cursor: pointer; position: relative;
+  padding: 22px 48px 22px 4px; font-size: 17px; font-weight: 700; color: var(--ink); letter-spacing: -.02em;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::before { content: "Q"; color: #1d4ed8; font-weight: 800; margin-right: 12px; }
+.faq-item summary::after {
+  content: "+"; position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  font-size: 24px; font-weight: 400; color: var(--muted); transition: transform .3s var(--ease);
+}
+.faq-item[open] summary::after { content: "–"; }
+.faq-item p { padding: 0 48px 24px 32px; color: var(--muted); font-size: 15.5px; }
+
 /* 스크롤 등장 효과 */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
 .reveal.visible { opacity: 1; transform: none; }
@@ -297,6 +330,7 @@ main > .section:nth-of-type(even) { background: var(--soft); }
   .gallery-item, .gallery-item.wide, .gallery-item.full { grid-column: span 2; aspect-ratio: 16 / 9; }
   .obesity-programs { grid-template-columns: 1fr; }
   .sub-clinics { grid-template-columns: 1fr; margin-bottom: 40px; }
+  .disease-grid { grid-template-columns: repeat(2, 1fr); }
   .skin-grid { grid-template-columns: 1fr; }
 }
 
@@ -309,7 +343,10 @@ main > .section:nth-of-type(even) { background: var(--soft); }
   .hero-photo { height: 240px; border-radius: 22px; }
   .hero-cards { grid-template-columns: 1fr; }
   .section { padding: 72px 0; }
-  .treatments, .steps { grid-template-columns: 1fr; }
+  .treatments, .steps, .disease-grid { grid-template-columns: 1fr; }
+  .info-box { padding: 26px 22px; }
+  .faq-item summary { font-size: 16px; padding-right: 40px; }
+  .faq-item p { padding: 0 8px 22px 28px; }
   .gallery { grid-template-columns: 1fr; }
   .gallery-item, .gallery-item.wide, .gallery-item.full { grid-column: span 1; aspect-ratio: 4 / 3; }
   .doctor-info h3 { font-size: 34px; }
