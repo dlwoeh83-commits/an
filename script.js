@@ -41,5 +41,48 @@ if ('IntersectionObserver' in window) {
   targets.forEach((el) => el.classList.add('visible'));
 }
 
+// 스크롤하면 헤더가 흰색으로 바뀜
+const header = document.querySelector('.site-header');
+const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 40);
+onScroll();
+window.addEventListener('scroll', onScroll, { passive: true });
+
+// 모바일 메뉴를 열면 헤더를 흰색으로
+toggle.addEventListener('click', () => header.classList.toggle('open', nav.classList.contains('open')));
+nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => header.classList.remove('open')));
+
+// 지금 진료 중인지 표시 (월~금 09:30~17:20 / 토 09:30~12:20 / 점심 12:20~14:00 / 일 휴무)
+(function showStatus() {
+  const box = document.getElementById('status');
+  const text = document.getElementById('statusText');
+  if (!box || !text) return;
+  const now = new Date();
+  const day = now.getDay();
+  const mins = now.getHours() * 60 + now.getMinutes();
+  const OPEN = 9 * 60 + 30;
+  const LUNCH_START = 12 * 60 + 20;
+  const LUNCH_END = 14 * 60;
+  const WEEKDAY_CLOSE = 17 * 60 + 20;
+  const SAT_CLOSE = 12 * 60 + 20;
+  let msg = '';
+  let open = false;
+
+  if (day === 0) {
+    msg = '오늘은 정기휴무 · 월요일 09:30 진료 시작';
+  } else if (day === 6) {
+    if (mins < OPEN) msg = '오늘 09:30 진료 시작';
+    else if (mins < SAT_CLOSE) { msg = '지금 진료 중 · 12:20까지'; open = true; }
+    else msg = '오늘 진료 종료 · 월요일 09:30 진료 시작';
+  } else {
+    if (mins < OPEN) msg = '오늘 09:30 진료 시작';
+    else if (mins < LUNCH_START) { msg = '지금 진료 중 · 17:20까지 (점심 12:20~14:00)'; open = true; }
+    else if (mins < LUNCH_END) msg = '점심시간 · 14:00부터 진료';
+    else if (mins < WEEKDAY_CLOSE) { msg = '지금 진료 중 · 17:20까지'; open = true; }
+    else msg = '오늘 진료 종료 · 내일 09:30 진료 시작';
+  }
+  text.textContent = msg;
+  box.classList.toggle('open', open);
+})();
+
 // 푸터 연도
 document.getElementById('year').textContent = new Date().getFullYear();
