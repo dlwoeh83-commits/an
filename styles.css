@@ -9,9 +9,9 @@
   --line: #e8ebef;
   --bg: #ffffff;
   --soft: #f5f7f8;
-  --accent: #0a7c7a;
-  --accent-dark: #075f5d;
-  --accent-soft: #e6f4f3;
+  --accent: #1d4ed8;
+  --accent-dark: #1e40af;
+  --accent-soft: #e8effd;
   --radius: 20px;
   --radius-sm: 12px;
   --header-h: 76px;
@@ -30,6 +30,12 @@ img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 ul, ol { list-style: none; }
 .container { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+/* 키보드로 이동할 때 보이는 포커스 표시 */
+a:focus-visible, button:focus-visible, summary:focus-visible {
+  outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px;
+}
+.contact-box a:focus-visible, .mobile-call:focus-visible { outline-color: #93c5fd; }
 
 /* ===== 버튼 ===== */
 .btn {
@@ -203,7 +209,7 @@ main > .section:nth-of-type(even) { background: var(--soft); }
 .hours-table small { color: var(--muted); font-weight: 400; font-size: 13.5px; margin-left: 6px; }
 .hours-table .closed td { color: var(--accent); }
 .contact-box { padding: 44px 40px; border-radius: 28px; background: var(--ink); color: #fff; display: flex; flex-direction: column; justify-content: center; }
-.contact-box .eyebrow { color: #7fd6d3; }
+.contact-box .eyebrow { color: #93c5fd; }
 .contact-box h3 { font-size: 24px; font-weight: 800; margin: 10px 0 12px; letter-spacing: -.03em; }
 .contact-phone { display: block; font-size: 34px; font-weight: 800; letter-spacing: -.02em; margin-bottom: 8px; }
 .contact-box p { color: rgba(255,255,255,.65); margin-bottom: 28px; font-size: 15px; }
