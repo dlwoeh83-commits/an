@@ -19,11 +19,18 @@
   --radius: 24px;
   --radius-sm: 14px;
   --header-h: 76px;
+  --sec-pad: 92px;
   --ease: cubic-bezier(.22, .61, .36, 1);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) - 8px); }
+
+/* 컴퓨터 화면에서는 전체를 90% 크기로 보여줌 (휴대폰은 글씨가 작아지지 않게 100% 유지) */
+@media (min-width: 901px) {
+  html { zoom: 0.9; }
+  html .hero { min-height: min(calc(100svh / 0.9), 960px); }
+}
+html { scroll-behavior: smooth; scroll-padding-top: 0; }
 body {
   font-family: "Pretendard", -apple-system, "Malgun Gothic", sans-serif;
   color: var(--text); background: var(--bg);
@@ -91,9 +98,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 /* ===== 히어로 (풀블리드 사진) ===== */
 .hero {
   position: relative; isolation: isolate; color: #fff; overflow: hidden;
-  min-height: 100vh; min-height: 100svh;
-  display: flex; flex-direction: column; justify-content: space-between;
-  padding: calc(var(--header-h) + 72px) 0 36px; background: var(--navy);
+  min-height: min(100svh, 860px);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: calc(var(--header-h) + 20px) 0 40px; background: var(--navy);
 }
 .hero-bg {
   position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover;
@@ -107,7 +114,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 }
 @keyframes kenburns { from { transform: scale(1.02); } to { transform: scale(1.12); } }
 
-.hero-inner { padding-top: 24px; }
+.hero-inner { padding-top: 0; }
 .hero-inner > * { opacity: 0; transform: translateY(26px); animation: rise .9s var(--ease) forwards; }
 .hero-inner > :nth-child(1) { animation-delay: .05s; }
 .hero-inner > :nth-child(2) { animation-delay: .15s; }
@@ -119,20 +126,20 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .hero-status {
   display: inline-flex; align-items: center; gap: 10px; padding: 9px 18px 9px 14px; border-radius: 999px;
   background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); backdrop-filter: blur(12px);
-  font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 34px;
+  font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 24px;
 }
 .hero-status .dot { width: 9px; height: 9px; border-radius: 50%; background: #94a3b8; flex: none; }
 .hero-status.open .dot { background: #34d399; box-shadow: 0 0 0 0 rgba(52,211,153,.7); animation: pulse 2s infinite; }
 @keyframes pulse { 70% { box-shadow: 0 0 0 10px rgba(52,211,153,0); } 100% { box-shadow: 0 0 0 0 rgba(52,211,153,0); } }
-.hero-kicker { font-size: 13px; font-weight: 700; letter-spacing: .26em; color: var(--sky); margin-bottom: 22px; }
+.hero-kicker { font-size: 13px; font-weight: 700; letter-spacing: .26em; color: var(--sky); margin-bottom: 14px; }
 .hero h1 {
-  font-size: clamp(42px, 7.4vw, 98px); line-height: 1.08; font-weight: 800; letter-spacing: -.055em; margin-bottom: 30px;
+  font-size: clamp(38px, 6.3vw, 83px); line-height: 1.08; font-weight: 800; letter-spacing: -.055em; margin-bottom: 20px;
 }
 .hero h1 em { font-style: normal; background: linear-gradient(100deg, #fff 0%, #93c5fd 60%, #60a5fa 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.hero-desc { font-size: clamp(16px, 1.5vw, 20px); color: rgba(255,255,255,.78); margin-bottom: 42px; font-weight: 400; }
+.hero-desc { font-size: clamp(16px, 1.5vw, 20px); color: rgba(255,255,255,.78); margin-bottom: 30px; font-weight: 400; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 
-.hero-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 56px; }
+.hero-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 40px; }
 .tile {
   position: relative; display: flex; flex-direction: column; gap: 6px; padding: 26px 28px 28px;
   border-radius: 22px; background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.16);
@@ -147,9 +154,13 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .tile:hover .tile-arrow { transform: translate(5px, -5px) rotate(-45deg); }
 
 /* ===== 공통 섹션 ===== */
-.section { padding: 150px 0; background: var(--bg); }
+.section {
+  padding: var(--sec-pad) 0; background: var(--bg);
+  /* 메뉴로 이동했을 때 헤더 바로 아래 24px 지점에 제목이 오도록 */
+  scroll-margin-top: calc(var(--header-h) + 24px - var(--sec-pad));
+}
 #visit, #pain, #doctor, #faq { background: var(--soft); }
-.section-head { max-width: 760px; margin: 0 0 72px; text-align: left; }
+.section-head { max-width: 760px; margin: 0 0 40px; text-align: left; }
 .section-head.left { margin: 0 0 36px; }
 .eyebrow {
   display: inline-flex; align-items: center; gap: 12px;
@@ -157,11 +168,11 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 }
 .eyebrow::before { content: ""; width: 32px; height: 2px; background: currentColor; border-radius: 2px; }
 .section-head h2 {
-  font-size: clamp(32px, 4.6vw, 58px); font-weight: 800; color: var(--ink);
-  letter-spacing: -.05em; line-height: 1.18; margin: 18px 0 20px;
+  font-size: clamp(28px, 3.5vw, 44px); font-weight: 800; color: var(--ink);
+  letter-spacing: -.05em; line-height: 1.22; margin: 10px 0 10px;
 }
-.section-head p:not(.eyebrow) { color: var(--muted); font-size: clamp(16px, 1.4vw, 19px); }
-.sub-title { font-size: 22px; font-weight: 800; color: var(--ink); margin: 0 0 22px; letter-spacing: -.04em; }
+.section-head p:not(.eyebrow) { color: var(--muted); font-size: clamp(15.5px, 1.2vw, 17.5px); }
+.sub-title { font-size: 20px; font-weight: 800; color: var(--ink); margin: 0 0 16px; letter-spacing: -.04em; }
 .notice { font-size: 13.5px; color: var(--muted); margin-top: 26px; }
 
 /* 병원 소개 */
@@ -216,7 +227,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .gallery-item.missing::before { content: "사진을 images 폴더에 넣어주세요"; color: var(--muted); font-size: 14px; }
 
 /* 세부 클리닉 (통증·관절·신경) */
-.sub-clinics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 72px; }
+.sub-clinics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 40px; }
 .sub-clinic {
   position: relative; overflow: hidden; padding: 38px 34px; border-radius: var(--radius); color: #fff;
   background: var(--grad); display: flex; flex-direction: column; gap: 8px; min-height: 190px; justify-content: flex-end;
@@ -231,7 +242,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .sub-clinic span { font-size: 15px; opacity: .85; position: relative; }
 
 /* 통증 클리닉 */
-.symptoms { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 72px; }
+.symptoms { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
 .symptoms span { padding: 12px 22px; border-radius: 999px; background: #fff; border: 1px solid var(--line); color: var(--ink); font-size: 15px; font-weight: 600; transition: all .25s var(--ease); }
 .symptoms span:hover { background: var(--accent); border-color: var(--accent); color: #fff; transform: translateY(-2px); }
 .disease-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -398,7 +409,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 }
 
 @media (max-width: 900px) {
-  :root { --header-h: 68px; }
+  :root { --header-h: 68px; --sec-pad: 64px; }
   .nav-toggle { display: flex; }
   .site-nav {
     position: fixed; top: var(--header-h); left: 0; right: 0;
@@ -410,13 +421,12 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   .site-nav a, .site-nav a:hover { padding: 16px 4px; font-size: 16px; border-bottom: 1px solid var(--line); border-radius: 0; color: var(--text); background: none; }
   .site-nav .nav-cta, .site-nav .nav-cta:hover { margin: 18px 0 0; text-align: center; border-bottom: 0; border-radius: 999px; background: var(--accent); color: #fff; }
 
-  .hero { padding-top: calc(var(--header-h) + 44px); }
-  .hero-tiles { grid-template-columns: 1fr; gap: 10px; margin-top: 44px; }
+  .hero { min-height: auto; padding-top: calc(var(--header-h) + 24px); }
+  .hero-tiles { grid-template-columns: 1fr; gap: 10px; margin-top: 32px; }
   .tile { padding: 22px 24px; }
   .tile strong { font-size: 20px; }
   .br-pc { display: none; }
-  .section { padding: 100px 0; }
-  .section-head { margin-bottom: 48px; }
+  .section-head { margin-bottom: 28px; }
   .values { grid-template-columns: 1fr; }
   .value, .value + .value { padding: 34px 0; border-left: 0; }
   .value + .value { border-top: 1px solid var(--line); }
@@ -437,7 +447,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   .hero-status { font-size: 13px; margin-bottom: 26px; }
   .hero-kicker { font-size: 11.5px; letter-spacing: .18em; }
   .hero-actions .btn { width: 100%; }
-  .section { padding: 84px 0; }
+  :root { --sec-pad: 56px; }
   .steps, .treatments, .disease-grid { grid-template-columns: 1fr; }
   .info-box { padding: 28px 22px; }
   .gallery { grid-template-columns: 1fr; }
